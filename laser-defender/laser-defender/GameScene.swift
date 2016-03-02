@@ -21,25 +21,31 @@ class GameScene: SKScene {
     
     override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
        /* Called when a touch begins */
-        
-        for touch in touches {
-            let location = touch.locationInNode(self)
-            
-            let sprite = SKSpriteNode(imageNamed:"Spaceship")
-            
-            sprite.xScale = 0.5
-            sprite.yScale = 0.5
-            sprite.position = location
-            
-            let action = SKAction.rotateByAngle(CGFloat(M_PI), duration:1)
-            
-            sprite.runAction(SKAction.repeatActionForever(action))
-            
-            self.addChild(sprite)
-        }
     }
    
     override func update(currentTime: CFTimeInterval) {
         /* Called before each frame is rendered */
+    }
+    
+    func random() -> CGFloat {
+        return CGFloat(Float(arc4random()) / 0xFFFFFFFF)
+    }
+    
+    func random(min min: CGFloat, max: CGFloat) -> CGFloat {
+        return random() * (max - min) + min
+    }
+    
+    // Creates and adds enemy to the scene
+    func addEnemy( ) {
+        // Create enemy
+        let enemy = SKSpriteNode(imageNamed: "enemy")
+        
+        // Determine where to spawn the monster along the X and Y axis
+        // Use full Y axis and only half the x
+        let actualX = random(min: enemy.size.width/2, max: size.width - enemy.size.height/2)
+        let actualY = random(min: enemy.size.height/2, max: size.height - enemy.size.height/2)
+        
+        
+        
     }
 }
